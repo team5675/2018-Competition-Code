@@ -17,6 +17,7 @@ To make setting up automonous, data analyization, tune ups, and in-round robot s
 C:\Users\jetlo>cd C:\Users\jetlo\Documents\GitHub\MattawanWiredCats2018\frc-5675-dashboard
 ```
 Then press enter.
+
 3. Type in
 ```
 npm start
