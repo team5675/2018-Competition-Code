@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team5675.robot;
+package org.mattawanwiredcats.code.robot2018;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
