@@ -1,5 +1,7 @@
 package SwerveDrive;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Talon;
@@ -9,7 +11,7 @@ public class WheelDrive {
 	
 private Talon angleMotor;
 
-private Talon speedMotor;
+private VictorSPX speedMotor;
 
 private PIDController pidController;
 
@@ -18,7 +20,7 @@ public WheelDrive (int angleMotor, int speedMotor, int encoder) { //Idk if this 
 	
 	this.angleMotor = new Talon (angleMotor);
 	
-	this.speedMotor = new Talon (speedMotor);
+	this.speedMotor = new VictorSPX (speedMotor);
 	
 	pidController = new PIDController (1, 0, 2, new AnalogInput (encoder), this.angleMotor); //the numbers are our PID Constants
 	
@@ -34,7 +36,7 @@ private final double MAX_VOLTS = 0;               //getting setpoint for PID Con
 
 public void drive (double speed, double angle) {
 	
-	speedMotor.set(speed);
+	speedMotor.set(ControlMode.PercentOutput, speed);
 	
 	double setpoint = angle * (MAX_VOLTS * 0.5) + (MAX_VOLTS * 0.5);
 	
