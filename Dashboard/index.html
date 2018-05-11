@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrine-to-fit=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+		<title>WiredCats Dashboard</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">WiredCats Dashboard</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Auto Plotter</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Tune</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Logs and Graphs</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h1 class="text-success" style="font-size: 96px;">0:00</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-auto">
+					<div class="card">
+						<div style="width: 512px; height: 288px;" class="p-3 mb-2 bg-dark text-white">
+							<h3><span class="badge badge-danger">Stream Unavailable</span></h3>
+						</div>
+						<div class="card-body">
+							FPS: 0 MBPS: 0
+						</div>
+					</div>
+				</div>
+				<div class="col-md-auto">
+					<div class="card">
+						<div style="width: 512px; height: 288px;" class="p-3 mb-2 bg-dark text-white">
+							<h3><span class="badge badge-danger">Stream Unavailable</span></h3>
+						</div>
+						<div class="card-body">
+							FPS: 0 MBPS: 0
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-auto">
+					<h3><span class="badge badge-danger">No Connection With Robot!</span> <span class="badge badge-success">Voltage: 0</span></h3>
+				</div>
+				<div class="col-md-auto">
+					<table cellpadding="2">
+						<tr>
+							<td><div style="width: 40px; height: 40px; background-color: #007bff;"></div></td>
+							<td><div style="width: 40px; height: 40px; background-color: #dc3545;"></div></td>
+						</tr>
+						<tr>
+							<td><div style="width: 40px; height: 40px; background-color: #dc3545;"></div></td>
+							<td><div style="width: 40px; height: 40px; background-color: #007bff;"></div></td>
+						</tr>
+						<tr>
+							<td><div style="width: 40px; height: 40px; background-color: #007bff;"></div></td>
+							<td><div style="width: 40px; height: 40px; background-color: #dc3545;"></div></td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-md-auto">
+					<div style="position: relative; text-align: center;">
+						<img src="img/gyro.png" alt="Gyro" width="150" height="150">
+						<h3 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" class="text-primary">0°</h3>
+					</div>
+				</div>
+				<div class="col-md-auto">
+					<div class="dropdown">
+						<button class="btn btn-secondary droptown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Select Auto Mode
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">Nothing</a>
+						</div>
+						<br>
+						Current Auto Command:
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+	</body>
+</html>
