@@ -73,6 +73,19 @@ public class SwerveDrive {
 		}
 		
 		
+		else {
+			
+			backRightSpeed = Math.sqrt ((a * a ) + (d * d));
+			
+			backLeftSpeed = Math.sqrt ((a * a ) + (c * c));
+					
+			frontRightSpeed = Math.sqrt ((b * b ) + (d * d));
+					
+			frontLeftSpeed = Math.sqrt ((b * b ) + (c * c));
+			
+		}
+		
+		
 		double backRightAngle = Math.atan2 (a, d) / Math.PI; //and the angles
 		
 		double backLeftAngle = Math.atan2 (a, c) / Math.PI;
