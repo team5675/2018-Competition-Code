@@ -27,6 +27,8 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
+import Autos.autoSelections;
+
 
 public class Robot extends SampleRobot {
 	
@@ -64,7 +66,7 @@ public class Robot extends SampleRobot {
 	
 	Encoder liftencoder = new Encoder(2, 3);//elevator encoder
 	
-	Encoder dencoder = new Encoder(0, 1);
+	Encoder driveEncoder = new Encoder(0, 1);
 	
 	AHRS gyro = new AHRS(SerialPort.Port.kMXP);
 	
@@ -84,8 +86,8 @@ public class Robot extends SampleRobot {
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		
 		gyro.reset();
-		dencoder.reset();
-		dencoder.setDistancePerPulse(0.0097714);
+		driveEncoder.reset();
+		driveEncoder.setDistancePerPulse(0.0097714);
 		comp.setClosedLoopControl(false);
 		comp.start();
 		clamp.set(Value.kReverse);
@@ -93,9 +95,15 @@ public class Robot extends SampleRobot {
 		theight = 300000;
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public void autonomous() {
+		
+		
+		if (isAutonomous()) {
+		autoSelections.autoSelections(switch1, switch2, switch3);
+		}
+	
 		
 		while(DriverStation.getInstance().getGameSpecificMessage().length()<1) {//wait until we get the signal
 			Timer.delay(0.05);
@@ -114,11 +122,11 @@ public class Robot extends SampleRobot {
 			scale = true;
 		}
 		gyro.reset();
-		dencoder.reset();
+		driveEncoder.reset();
 		if((switch1.get() == false) && (switch2.get() == true) && (switch3.get() == true)) {
 		System.out.println("you are currently just driving forward");
 		//Drive forward mode
-		while((dencoder.getDistance()>-120) && isAutonomous()) {
+		while((driveEncoder.getDistance()>-120) && isAutonomous()) {
 			chassis.arcadeDrive(0.5, gyro.getAngle() * 0.06);
 			Timer.delay(0.05);
 		}
@@ -130,14 +138,14 @@ public class Robot extends SampleRobot {
 		if(swtch) {
 		deploy.set(Value.kReverse);
 		clamp.set(Value.kForward);
-		while((dencoder.getDistance()>-10) && isAutonomous()) {
+		while((driveEncoder.getDistance()>-10) && isAutonomous()) {
 			chassis.arcadeDrive(0.6, gyro.getAngle()*.1);
 		}
 		while((gyro.getAngle()<15) && isAutonomous()) {
 			chassis.arcadeDrive(0, -0.6);
 		}
-		dencoder.reset();
-		while((dencoder.getDistance()>-80) && isAutonomous()) {
+		driveEncoder.reset();
+		while((driveEncoder.getDistance()>-80) && isAutonomous()) {
 			chassis.arcadeDrive(0.65, (gyro.getAngle()-24)*0.06);
 			if(liftencoder.getRaw()<68000){
 				lift1.set(1);
@@ -164,15 +172,15 @@ public class Robot extends SampleRobot {
 		}
 			lift1.set(0);
 			lift2.set(0);
-		dencoder.reset();
-		while(dencoder.getDistance()>-22) {
+		driveEncoder.reset();
+		while(driveEncoder.getDistance()>-22) {
 			chassis.arcadeDrive(0.5, (gyro.getAngle()+70)*.06);
 			intake1.set(-1);
 			intake2.set(1);
 		}
-		dencoder.reset();
+		driveEncoder.reset();
 		deploy.set(Value.kReverse);
-		while(dencoder.getDistance()<7) {
+		while(driveEncoder.getDistance()<7) {
 			chassis.arcadeDrive(-0.5, (gyro.getAngle()+70)*.1);
 			intake1.set(-1);
 			intake2.set(1);
@@ -188,8 +196,8 @@ public class Robot extends SampleRobot {
 			intake1.set(0);
 			intake2.set(0);
 		}
-		dencoder.reset();
-		while(dencoder.getDistance()>-3) {
+		driveEncoder.reset();
+		while(driveEncoder.getDistance()>-3) {
 			chassis.arcadeDrive(0.5, (gyro.getAngle()-20)*.1);
 			intake1.set(1);
 			intake2.set(-1);
@@ -202,14 +210,14 @@ public class Robot extends SampleRobot {
 		}
 		else if(!swtch) {
 			clamp.set(Value.kForward);
-			while((dencoder.getDistance()>-10) && isAutonomous()) {
+			while((driveEncoder.getDistance()>-10) && isAutonomous()) {
 				chassis.arcadeDrive(0.6, gyro.getAngle()*.1);
 			}
 			while((gyro.getAngle()>-30) && isAutonomous()) {
 				chassis.arcadeDrive(0, 0.6);
 			}
-			dencoder.reset();
-			while((dencoder.getDistance()>-86) && isAutonomous()) {
+			driveEncoder.reset();
+			while((driveEncoder.getDistance()>-86) && isAutonomous()) {
 				chassis.arcadeDrive(0.7, (gyro.getAngle()+38)*.1);
 				if(liftencoder.getRaw()<68000){
 						lift1.set(1);
@@ -227,15 +235,15 @@ public class Robot extends SampleRobot {
 			}
 			deploy.set(Value.kReverse);
 			/*
-			dencoder.reset();
-			while(dencoder.getDistance()>-4) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-4) {
 				chassis.arcadeDrive(0.5, (gyro.getAngle()-68)*.07);
 				intake1.set(-1);
 				intake2.set(1);
 			}
-			dencoder.reset();
+			driveEncoder.reset();
 			clamp.set(Value.kForward);
-			while(dencoder.getDistance()<4) {
+			while(driveEncoder.getDistance()<4) {
 				chassis.arcadeDrive(-0.5, (gyro.getAngle()-68)*.07);
 				intake1.set(-1);
 				intake2.set(1);
@@ -243,8 +251,8 @@ public class Robot extends SampleRobot {
 			while(gyro.getAngle()>-20) {
 				chassis.arcadeDrive(0, 0.7);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-4) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-4) {
 				chassis.arcadeDrive(0.5, (gyro.getAngle()+25)*.08);
 				intake1.set(1);
 				intake2.set(-1);
@@ -261,24 +269,24 @@ public class Robot extends SampleRobot {
 		}
 		}
 		/*if(scale) {//2 scale in middle(whoops)
-			while(dencoder.getDistance()>-10) {
+			while(driveEncoder.getDistance()>-10) {
 				chassis.arcadeDrive(0.6, gyro.getAngle()*0.06);
 			}
 			while(gyro.getAngle()<38) {
 				chassis.arcadeDrive(0, -0.6);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-145) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-145) {
 				chassis.arcadeDrive(0.75, (gyro.getAngle()-42)*.1);
 			}
 			while(gyro.getAngle()>-8) {
 				chassis.arcadeDrive(0, 0.6);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-90) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-90) {
 				chassis.arcadeDrive(0.7, (gyro.getAngle()+15)*.08);
 			}
-			while(dencoder.getDistance()>-140) {
+			while(driveEncoder.getDistance()>-140) {
 				chassis.arcadeDrive(0.55, (gyro.getAngle()+15)*.08);
 				if(liftencoder.getRaw()<120000) {
 					lift1.set(1);
@@ -291,72 +299,72 @@ public class Robot extends SampleRobot {
 			}
 			chassis.arcadeDrive(0, 0);
 			deploy.set(Value.kReverse);
-			dencoder.reset();
+			driveEncoder.reset();
 			/*
-			while(dencoder.getDistance()<25) {
+			while(driveEncoder.getDistance()<25) {
 				chassis.arcadeDrive(-0.65, (gyro.getAngle()+15)*.08);
 			}
 			while(gyro.getAngle()>-142) {
 				chassis.arcadeDrive(0, 0.7);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-15) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-15) {
 				chassis.arcadeDrive(0.6, (gyro.getAngle()+153)*.08);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()<15) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()<15) {
 				chassis.arcadeDrive(-0.6, (gyro.getAngle()+153)*.08);
 			}
 			while(gyro.getAngle()<-45) {
 				chassis.arcadeDrive(0, -0.7);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-25) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-25) {
 				chassis.arcadeDrive(0.6, (gyro.getAngle()+30)*.05);
 			}
 			chassis.arcadeDrive(0, 0);
 		}
 		else if(!scale) {
-			while(dencoder.getDistance()>-10) {
+			while(driveEncoder.getDistance()>-10) {
 				chassis.arcadeDrive(0.6, gyro.getAngle()*0.1);
 			}
 			while(gyro.getAngle()>-45) {
 				chassis.arcadeDrive(0, 0.6);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-160) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-160) {
 				chassis.arcadeDrive(0.75, (gyro.getAngle()+53)*.08);
 			}
 			while(gyro.getAngle()<1) {
 				chassis.arcadeDrive(0, -0.6);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-70) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-70) {
 				chassis.arcadeDrive(0.7, (gyro.getAngle()-10)*.06);
 			}
-			while(dencoder.getDistance()>-133) {
+			while(driveEncoder.getDistance()>-133) {
 				chassis.arcadeDrive(0.55, (gyro.getAngle()-10)*.08);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()<13) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()<13) {
 				chassis.arcadeDrive(-0.55, (gyro.getAngle()-10)*.08);
 			}
 			while(gyro.getAngle()<140) {
 				chassis.arcadeDrive(0, -0.7);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-18) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-18) {
 				chassis.arcadeDrive(0.6, (gyro.getAngle()-150)*0.08);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()<18) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()<18) {
 				chassis.arcadeDrive(-0.6, (gyro.getAngle()-150)*0.08);
 			}
 			while(gyro.getAngle()>22) {
 				chassis.arcadeDrive(0, 0.7);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-15) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-15) {
 				chassis.arcadeDrive(0.6, (gyro.getAngle()-15)*.08);
 			}
 			chassis.arcadeDrive(0, 0);
@@ -365,12 +373,12 @@ public class Robot extends SampleRobot {
 			System.out.println("You are currently doing the scale");
 		if(scale) {//two on the scale, starting right
 			clamp.set(Value.kForward);
-			dencoder.reset();
-			while((dencoder.getDistance()>-205) && isAutonomous()) {
+			driveEncoder.reset();
+			while((driveEncoder.getDistance()>-205) && isAutonomous()) {
 				chassis.arcadeDrive(0.77, gyro.getAngle()*0.1);
 				System.out.println("loop 1: "+liftencoder.getRaw());
 			}
-			while((dencoder.getDistance()>-276) && isAutonomous()) {
+			while((driveEncoder.getDistance()>-276) && isAutonomous()) {
 				chassis.arcadeDrive(0.5, gyro.getAngle()*0.1);
 				System.out.println("loop 2: "+liftencoder.getRaw());
 				if(liftencoder.getRaw()<260000) {
@@ -394,8 +402,8 @@ public class Robot extends SampleRobot {
 					lift2.set(.25);
 				}
 			}
-			dencoder.reset();
-			while((dencoder.getDistance()>-12) && isAutonomous()) {
+			driveEncoder.reset();
+			while((driveEncoder.getDistance()>-12) && isAutonomous()) {
 				chassis.arcadeDrive(0.5, (gyro.getAngle()+50)*0.08);
 				System.out.println("loop 4: "+liftencoder.getRaw());
 				if(liftencoder.getRaw()<260000) {
@@ -407,7 +415,7 @@ public class Robot extends SampleRobot {
 					lift2.set(.25);
 				}
 			}
-			/*dencoder.reset();
+			/*driveEncoder.reset();
 			while((gyro.getAngle()>-135) && isAutonomous()) {
 				chassis.arcadeDrive(0, 0.7);
 				if(liftencoder.getRaw()>150) {
@@ -421,8 +429,8 @@ public class Robot extends SampleRobot {
 					lift2.set(0);
 				}
 			}
-			dencoder.reset();
-			while((dencoder.getDistance()>-85) && isAutonomous()) {
+			driveEncoder.reset();
+			while((driveEncoder.getDistance()>-85) && isAutonomous()) {
 				chassis.arcadeDrive(0.65, (gyro.getAngle()+142)*0.08);
 				intake1.set(-1);
 				intake2.set(1);
@@ -435,12 +443,12 @@ public class Robot extends SampleRobot {
 					lift2.set(0);
 				}
 			}
-			dencoder.reset();
+			driveEncoder.reset();
 			intake1.set(0);
 			intake2.set(0);
-			while((dencoder.getDistance()<55) && isAutonomous()) {
+			while((driveEncoder.getDistance()<55) && isAutonomous()) {
 				chassis.arcadeDrive(-0.6, (gyro.getAngle()+142)*0.08);
-				if(dencoder.getDistance()<5) {
+				if(driveEncoder.getDistance()<5) {
 					intake1.set(-.4);
 					intake2.set(-.4);
 				}
@@ -468,8 +476,8 @@ public class Robot extends SampleRobot {
 					lift2.set(0);
 				}
 			}
-			dencoder.reset();
-			while((dencoder.getDistance()>-6) && isAutonomous()) {
+			driveEncoder.reset();
+			while((driveEncoder.getDistance()>-6) && isAutonomous()) {
 				chassis.arcadeDrive(0.5, (gyro.getAngle()+50)*0.08);
 				lift1.set(.25);
 				lift2.set(.25);
@@ -481,8 +489,8 @@ public class Robot extends SampleRobot {
 			intake1.set(0);
 			intake2.set(0);
 			clamp.set(Value.kReverse);
-			dencoder.reset();
-			while(dencoder.getDistance()<12) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()<12) {
 				chassis.arcadeDrive(-.5, 0);
 			}
 			chassis.arcadeDrive(0,0);
@@ -499,18 +507,18 @@ public class Robot extends SampleRobot {
 		}
 		else if(!scale) {
 			clamp.set(Value.kForward);
-			dencoder.reset();
-			while((dencoder.getDistance()>-190) && isAutonomous()) {
+			driveEncoder.reset();
+			while((driveEncoder.getDistance()>-190) && isAutonomous()) {
 				chassis.arcadeDrive(0.75, gyro.getAngle()*0.1);
 			}
-			while((dencoder.getDistance()>-215) && isAutonomous()) {
+			while((driveEncoder.getDistance()>-215) && isAutonomous()) {
 				chassis.arcadeDrive(0.6, gyro.getAngle()*0.1);
 			}
 			while((gyro.getAngle()>-80) && isAutonomous()) {
 				chassis.arcadeDrive(0, 0.72);
 			}
-			dencoder.reset();
-			while((dencoder.getDistance()>-208) && isAutonomous()) {
+			driveEncoder.reset();
+			while((driveEncoder.getDistance()>-208) && isAutonomous()) {
 				chassis.arcadeDrive(0.7, (gyro.getAngle()+87)*0.08);
 			}
 			while((gyro.getAngle()<5) && isAutonomous()) {
@@ -524,8 +532,8 @@ public class Robot extends SampleRobot {
 					lift2.set(0.2);
 				}
 			}
-			dencoder.reset();
-			while((dencoder.getDistance()>-12) && isAutonomous()) {
+			driveEncoder.reset();
+			while((driveEncoder.getDistance()>-12) && isAutonomous()) {
 				chassis.arcadeDrive(0.55, (gyro.getAngle()-20)*0.08);
 				if(liftencoder.getRaw()<260000) {
 					lift1.set(1);
@@ -536,11 +544,11 @@ public class Robot extends SampleRobot {
 					lift2.set(0.25);
 				}
 			}
-			dencoder.reset();
+			driveEncoder.reset();
 			lift1.set(.25);
 			lift2.set(.25);
 			/*
-			while(dencoder.getDistance()<35) {
+			while(driveEncoder.getDistance()<35) {
 				chassis.arcadeDrive(-0.5, (gyro.getAngle()-20)*0.08);
 				lift1.set(0.25);
 				lift2.set(0.25);
@@ -548,19 +556,19 @@ public class Robot extends SampleRobot {
 			while(gyro.getAngle()<130) {
 				chassis.arcadeDrive(0, -0.6);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-15) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-15) {
 				chassis.arcadeDrive(0.5, (gyro.getAngle()-135)*0.08);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()<15) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()<15) {
 				chassis.arcadeDrive(-0.5, (gyro.getAngle()-135)*0.08);
 			}
 			while(gyro.getAngle()>28) {
 				chassis.arcadeDrive(0, 0.6);
 			}
-			dencoder.reset();
-			while(dencoder.getDistance()>-35) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()>-35) {
 				chassis.arcadeDrive(0.5, (gyro.getAngle()-20)*0.08);
 			}*/
 			intake1.set(.6);
@@ -570,8 +578,8 @@ public class Robot extends SampleRobot {
 			intake1.set(0);
 			intake2.set(0);
 			clamp.set(Value.kReverse);
-			dencoder.reset();
-			while(dencoder.getDistance()<15) {
+			driveEncoder.reset();
+			while(driveEncoder.getDistance()<15) {
 				chassis.arcadeDrive(-.5, 0);
 			}
 			chassis.arcadeDrive(0,0);
@@ -591,7 +599,7 @@ public class Robot extends SampleRobot {
 	@Override
 	public void operatorControl() {
 		gyro.reset();
-		dencoder.reset();
+		driveEncoder.reset();
 		Timer.delay(0.005);
 		while(isOperatorControl() & isEnabled()) {
 			
@@ -617,14 +625,14 @@ public class Robot extends SampleRobot {
 				lift2.set(0);
 			}
 			
-			if(xbox2.getBButton()) {//claw deployment pneumatics
+			if(xbox2.getBButton()) {//claw clamping pneumatics
 				deploy.set(Value.kForward);
 			}
 			else if(xbox2.getAButton()){
 				deploy.set(Value.kReverse);
 			}
 			
-			if(xbox2.getRawButton(6)) {//claw clamping pneumatics
+			if(xbox2.getRawButton(6)) {//claw deployment pneumatics
 				clamp.set(Value.kForward);
 			}
 			else if(xbox2.getRawButton(5)) {
@@ -645,7 +653,7 @@ public class Robot extends SampleRobot {
 				arm.set(xbox2.getRawAxis(5)*-.6);
 
 			//System.out.println(gyro.getAngle());
-			System.out.println(dencoder.getRaw());
+			System.out.println(driveEncoder.getRaw());
 			
 			Timer.delay(0.005);
 		}
