@@ -6,8 +6,7 @@ import Autos.autoSelections;
 import Autos.autoExecution;
 
 public class autoSelections{
-
-	public static double autoMode = 0;
+	
 	
 	static String gameData1 = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);
 	
@@ -90,5 +89,35 @@ public class autoSelections{
 			}
 		}
 		
+		
+		if ((switch1.get() == true) && (switch2.get() == false) && (switch3.get() == false)){//right side start & cross
+			
+			System.out.println("Right Side Plus Crossing is Going");
+			
+			if ((gameData1.equals("L")) || (gameData1.equals("R")) && (gameData2.equals("L"))) {
+				
+				autoExecution.leftCross(true);
+			}
+			
+			if ((gameData1.equals("L")) || (gameData1.equals("R")) && (gameData2.equals("R"))) {
+				
+				autoExecution.rightScale(true);
+			}
+		}
+		
+		if ((switch1.get() == false) && (switch2.get() == false) && (switch3.get() == true)){//left side start & cross
+			
+			System.out.println("Left Side Plus Crossing is Going");
+			
+			if ((gameData1.equals("L")) || (gameData1.equals("R")) && (gameData2.equals("L"))) {
+				
+				autoExecution.leftScale(true);
+			}
+			 
+			if ((gameData1.equals("L")) || (gameData1.equals("R")) && (gameData2.equals("R"))) {
+				
+				autoExecution.rightCross(true);
+			}
+		}
 	}
 }

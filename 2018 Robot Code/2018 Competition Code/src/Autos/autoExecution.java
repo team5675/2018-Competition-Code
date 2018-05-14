@@ -72,7 +72,6 @@ public static double angleRotation(double targetAngle, double theta) {
 	}
 	
 
-	@SuppressWarnings("deprecation")
 	public static void driveForward(boolean isAuto) {
 		
 		if(isAuto = true) {
@@ -92,16 +91,94 @@ public static double angleRotation(double targetAngle, double theta) {
 			}
 		}
 
-	
-
 	public static void leftSwitch(boolean isAuto) {
 		
+		while((driveEncoder.getDistance() > -100)) {
+			
+			driveTrain.arcadeDrive(0.6, angleRotation(0, gyro.getAngle()));
+		}
 		
+		while((gyro.getAngle() < 90)) {
+			
+			driveTrain.arcadeDrive(0, angleRotation(90, gyro.getAngle()));
+		}
+		
+		if(liftencoder.getRaw()<68000){
+			
+			
+			lift1.set(1);
+			
+			lift2.set(1);
+			
+		}
+		
+		else{
+			
+			
+			lift1.set(0);
+			
+			lift2.set(0);
+		}
+		
+while((gyro.getAngle() < 100)) {
+			
+			driveTrain.arcadeDrive(0, angleRotation(-65, gyro.getAngle()));
+			
+			deploy.set(Value.kForward);
+			
+			intake1.set(1);
+			
+			intake2.set(-1);
+			
+			lift1.set(.2);
+			
+			lift2.set(.2);
+		}
 	}
 	
 	public static void rightSwitch(boolean isAuto) {
 		
+while((driveEncoder.getDistance() > -100)) {
+			
+			driveTrain.arcadeDrive(0.6, angleRotation(0, gyro.getAngle()));
+		}
 		
+		while((gyro.getAngle() < -90)) {
+			
+			driveTrain.arcadeDrive(0, angleRotation(-90, gyro.getAngle()));
+		}
+		
+		if(liftencoder.getRaw()<68000){
+			
+			
+			lift1.set(1);
+			
+			lift2.set(1);
+			
+		}
+		
+		else{
+			
+			
+			lift1.set(0);
+			
+			lift2.set(0);
+		}
+		
+while((gyro.getAngle() < -100)) {
+			
+			driveTrain.arcadeDrive(0, angleRotation(-65, gyro.getAngle()));
+			
+			deploy.set(Value.kForward);
+			
+			intake1.set(1);
+			
+			intake2.set(-1);
+			
+			lift1.set(.2);
+			
+			lift2.set(.2);
+		}
 	}
 	
 	public static void centerSwitchRight(boolean isAuto) {
@@ -119,7 +196,7 @@ public static double angleRotation(double targetAngle, double theta) {
 		}
 		
 		
-		while((gyro.getAngle()<15)) {
+		while((gyro.getAngle() < 15)) {
 			
 			driveTrain.arcadeDrive(0, angleRotation(15, gyro.getAngle()));
 		}
@@ -167,7 +244,7 @@ public static double angleRotation(double targetAngle, double theta) {
 		}
 	}
 		
-		public static void centerSwitchLeft(boolean isAuto) {
+	public static void centerSwitchLeft(boolean isAuto) {
 		if (isAuto = true) {//left side
 			
 			clamp.set(Value.kForward);
@@ -232,84 +309,245 @@ public static double angleRotation(double targetAngle, double theta) {
 		
 	}
 	
-	public static void rightScale(boolean isAuto) {
-		//pls no judge, not cleaned up yet :(
+	public static void rightScale(boolean isAuto) {//pls no judge, not cleaned up yet :(
+		
 		
 		clamp.set(Value.kForward);
+		
+		deploy.set(Value.kReverse);
 		
 		driveEncoder.reset();
 		
 		while((driveEncoder.getDistance()>-205)) {
-			driveTrain.arcadeDrive(0.77, gyro.getAngle()*0.1);
+			
+			driveTrain.arcadeDrive(0.77, angleRotation(0, gyro.getAngle()));
+			
 			System.out.println("loop 1: "+liftencoder.getRaw());
 		}
+		
 		while((driveEncoder.getDistance()>-276)) {
+			
 			driveTrain.arcadeDrive(0.5, gyro.getAngle()*0.1);
+			
 			System.out.println("loop 2: "+liftencoder.getRaw());
-			if(liftencoder.getRaw()<260000) {
+			
+			if(liftencoder.getRaw() < 260000) {
+				
 				lift1.set(1);
+				
 				lift2.set(1);
 			}
+			
 			else {
 				lift1.set(.2);
+				
 				lift2.set(.2);
 			}
 		}
+		
 		while((gyro.getAngle()>-45)) {
+			
 			driveTrain.arcadeDrive(0, 0.75);
+			
 			System.out.println("loop 3: "+liftencoder.getRaw());
-			if(liftencoder.getRaw()<260000) {
+			
+			if(liftencoder.getRaw() < 260000) {
+				
 				lift1.set(1);
+				
 				lift2.set(1);
 			}
+			
 			else {
+				
 				lift1.set(.25);
+				
 				lift2.set(.25);
 			}
 		}
+		
 		driveEncoder.reset();
+		
 		while((driveEncoder.getDistance()>-12)) {
+			
 			driveTrain.arcadeDrive(0.5, (gyro.getAngle()+50)*0.08);
+			
 			System.out.println("loop 4: "+liftencoder.getRaw());
+			
 			if(liftencoder.getRaw()<260000) {
+				
 				lift1.set(1);
+				
 				lift2.set(1);
 			}
 			else {
+				
 				lift1.set(.25);
+				
 				lift2.set(.25);
 			}
 		}
+		
 		driveTrain.arcadeDrive(0, 0);
-		intake1.set(.8);
-		intake2.set(-.8);
+		
+		intake1.set(.9);
+		
+		intake2.set(-.9);
+		
 		Timer.delay(1);
+		
 		intake1.set(0);
+		
 		intake2.set(0);
+		
 		clamp.set(Value.kReverse);
+		
 		driveEncoder.reset();
-		while(driveEncoder.getDistance()<12) {
+		
+		while(driveEncoder.getDistance() < 12) {
+			
 			driveTrain.arcadeDrive(-.5, 0);
 		}
+		
 		driveTrain.arcadeDrive(0,0);
-		while((liftencoder.getDistance()>200)) {
+		
+		while((liftencoder.getDistance() > 200)) {
+			
 			lift1.set(-.8);
+			
 			lift2.set(-.8);
 		}
+		
 		lift1.set(0);
+		
 		lift2.set(0);
-		while(gyro.getAngle()>-135) {
+		
+		while(gyro.getAngle() > -135) {
+			
 			driveTrain.arcadeDrive(0, 0.75);
 		}
+		
+		driveTrain.arcadeDrive(0, 0);
+	}
+	
+	public static void leftCross(boolean isAuto) {
+		
+		clamp.set(Value.kForward);
+		
+		deploy.set(Value.kReverse);
+		
+		driveEncoder.reset();
+		
+		while((driveEncoder.getDistance()>-190)) {
+			
+			driveTrain.arcadeDrive(0.75, gyro.getAngle() * 0.1);
+		}
+		
+		while((driveEncoder.getDistance()>-215)) {
+			
+			driveTrain.arcadeDrive(0.6, gyro.getAngle() * 0.1);
+		}
+		
+		while((gyro.getAngle()>-80)) {
+			
+			driveTrain.arcadeDrive(0, 0.72);
+		}
+		
+		driveEncoder.reset();
+		
+		while((driveEncoder.getDistance() > -208)) {
+			
+			driveTrain.arcadeDrive(0.7, (gyro.getAngle() + 87) * 0.08);
+		}
+		
+		while((gyro.getAngle()<5)) {
+			
+			driveTrain.arcadeDrive(0, -0.62);
+			
+			if(liftencoder.getRaw()<260000) {
+				
+				lift1.set(1);
+				
+				lift2.set(1);
+			}
+			
+			else {
+				
+				lift1.set(0.2);
+				
+				lift2.set(0.2);
+			}
+		}
+		
+		driveEncoder.reset();
+		
+		while((driveEncoder.getDistance() > -12)) {
+			
+			driveTrain.arcadeDrive(0.55, (gyro.getAngle()-20)*0.08);
+			
+			if(liftencoder.getRaw() < 260000) {
+				
+				lift1.set(1);
+				
+				lift2.set(1);
+			}
+			else {
+				
+				lift1.set(0.25);
+				
+				lift2.set(0.25);
+			}
+		}
+		
+		driveEncoder.reset();
+		
+		lift1.set(.25);
+		
+		lift2.set(.25);
+		
+		intake1.set(.6);
+		
+		intake2.set(-.6);
+		
+		driveTrain.arcadeDrive(0, 0);
+		
+		Timer.delay(1);
+		
+		intake1.set(0);
+		
+		intake2.set(0);
+		
+		clamp.set(Value.kReverse);
+		
+		driveEncoder.reset();
+		
+		while(driveEncoder.getDistance() < 15) {
+			
+			driveTrain.arcadeDrive(-.5, 0);
+		}
+		
+		driveTrain.arcadeDrive(0,0);
+		
+		while((liftencoder.getDistance() > 200)) {
+			
+			lift1.set(-.8);
+			
+			lift2.set(-.8);
+		}
+		
+		lift1.set(0);
+		
+		lift2.set(0);
+		
+		while(gyro.getAngle() < 135) {
+			
+			driveTrain.arcadeDrive(0, -0.75);
+		}
+		
 		driveTrain.arcadeDrive(0,0);
 	}
 	
-	public void leftCross(boolean isAuto) {
-		
-		
-	}
-	
-	public void rightCross(boolean isAuto) {
+	public static void rightCross(boolean isAuto) {
 		
 		
 	}
