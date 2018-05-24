@@ -101,11 +101,21 @@ public class Robot extends SampleRobot {
 		
 		
 		if (isAutonomous()) {
+			
+			
+			while(DriverStation.getInstance().getGameSpecificMessage().length() < 1) {
+				
+				Timer.delay(.05);
+				
+			}
+			
+			
 		autoSelections.autoSelections(switch1, switch2, switch3);
+		
 		}
 	
 		
-		while(DriverStation.getInstance().getGameSpecificMessage().length()<1) {//wait until we get the signal
+		/*while(DriverStation.getInstance().getGameSpecificMessage().length()<1) {//wait until we get the signal
 			Timer.delay(0.05);
 		}
 		
@@ -201,7 +211,7 @@ public class Robot extends SampleRobot {
 			chassis.arcadeDrive(0.5, (gyro.getAngle()-20)*.1);
 			intake1.set(1);
 			intake2.set(-1);
-		}*/
+		}
 		chassis.arcadeDrive(0, 0);
 		lift1.set(0);
 		lift2.set(0);
@@ -257,7 +267,7 @@ public class Robot extends SampleRobot {
 				intake1.set(1);
 				intake2.set(-1);
 				clamp.set(Value.kReverse);
-			}*/
+			}
 			chassis.arcadeDrive(0, 0);
 			intake1.set(1);
 			intake2.set(-1);
@@ -368,7 +378,7 @@ public class Robot extends SampleRobot {
 				chassis.arcadeDrive(0.6, (gyro.getAngle()-15)*.08);
 			}
 			chassis.arcadeDrive(0, 0);
-		}*/
+		}
 		if((switch1.get() == true) && (switch2.get() == true) && (switch3.get() == false)) {
 			System.out.println("You are currently doing the scale");
 		if(scale) {//two on the scale, starting right
@@ -481,7 +491,7 @@ public class Robot extends SampleRobot {
 				chassis.arcadeDrive(0.5, (gyro.getAngle()+50)*0.08);
 				lift1.set(.25);
 				lift2.set(.25);
-			}*/
+			}
 			chassis.arcadeDrive(0, 0);
 			intake1.set(.8);
 			intake2.set(-.8);
@@ -570,7 +580,7 @@ public class Robot extends SampleRobot {
 			driveEncoder.reset();
 			while(driveEncoder.getDistance()>-35) {
 				chassis.arcadeDrive(0.5, (gyro.getAngle()-20)*0.08);
-			}*/
+			}
 			intake1.set(.6);
 			intake2.set(-.6);
 			chassis.arcadeDrive(0, 0);
@@ -594,7 +604,7 @@ public class Robot extends SampleRobot {
 			}
 			chassis.arcadeDrive(0,0);
 		}
-		}
+		}*/
 	}
 	@Override
 	public void operatorControl() {

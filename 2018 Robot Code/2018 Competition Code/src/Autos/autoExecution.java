@@ -93,6 +93,10 @@ public static double angleRotation(double targetAngle, double theta) {
 
 	public static void leftSwitch(boolean isAuto) {
 		
+		
+		if (isAuto = true) {
+			
+		
 		while((driveEncoder.getDistance() > -100)) {
 			
 			driveTrain.arcadeDrive(0.6, angleRotation(0, gyro.getAngle()));
@@ -133,10 +137,14 @@ while((gyro.getAngle() < 100)) {
 			lift1.set(.2);
 			
 			lift2.set(.2);
+			
 		}
+	}
 	}
 	
 	public static void rightSwitch(boolean isAuto) {
+		
+		if(isAuto = true) {
 		
 while((driveEncoder.getDistance() > -100)) {
 			
@@ -180,10 +188,11 @@ while((gyro.getAngle() < -100)) {
 			lift2.set(.2);
 		}
 	}
+	}
 	
 	public static void centerSwitchRight(boolean isAuto) {
 		
-		if(isAuto = true)//right side
+		if(isAuto = true) {//right side
 		
 		deploy.set(Value.kReverse);
 		
@@ -242,6 +251,7 @@ while((gyro.getAngle() < -100)) {
 			
 			lift2.set(.2);
 		}
+	}
 	}
 		
 	public static void centerSwitchLeft(boolean isAuto) {
@@ -306,11 +316,16 @@ while((gyro.getAngle() < -100)) {
 	
 	public static void leftScale(boolean isAuto) {
 		
-		
+		if(isAuto = true) {
+			
+			
+			
+		}
 	}
 	
-	public static void rightScale(boolean isAuto) {//pls no judge, not cleaned up yet :(
+	public static void rightScale(boolean isAuto) {
 		
+		if(isAuto = true) {
 		
 		clamp.set(Value.kForward);
 		
@@ -429,8 +444,11 @@ while((gyro.getAngle() < -100)) {
 		
 		driveTrain.arcadeDrive(0, 0);
 	}
+	}
 	
 	public static void leftCross(boolean isAuto) {
+		
+		if(isAuto = true) {
 		
 		clamp.set(Value.kForward);
 		
@@ -546,9 +564,14 @@ while((gyro.getAngle() < -100)) {
 		
 		driveTrain.arcadeDrive(0,0);
 	}
+	}
 	
 	public static void rightCross(boolean isAuto) {
 		
-		
+		if(isAuto = true) {
+			
+			
+			
+		}
 	}
 	}
