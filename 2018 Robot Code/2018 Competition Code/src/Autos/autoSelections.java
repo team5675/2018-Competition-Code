@@ -22,7 +22,7 @@ public class autoSelections{
 			
 			if (gameData1.equals("L") && gameData2.equals("L")) {
 				
-				autoExecution.rightScale(true);
+				autoExecution.rightSwitch(true);
 				
 			}
 			
@@ -94,12 +94,12 @@ public class autoSelections{
 			
 			System.out.println("Right Side Plus Crossing is Going");
 			
-			if ((gameData1.equals("L")) || (gameData1.equals("R")) && (gameData2.equals("L"))) {
+			if (((gameData1.equals("L")) || (gameData1.equals("R"))) && (gameData2.equals("L"))) {
 				
 				autoExecution.leftCross(true);
 			}
 			
-			if ((gameData1.equals("L")) || (gameData1.equals("R")) && (gameData2.equals("R"))) {
+			if (((gameData1.equals("L")) || (gameData1.equals("R"))) && (gameData2.equals("R"))) {
 				
 				autoExecution.rightScale(true);
 			}
@@ -109,15 +109,23 @@ public class autoSelections{
 			
 			System.out.println("Left Side Plus Crossing is Going");
 			
-			if ((gameData1.equals("L")) || (gameData1.equals("R")) && (gameData2.equals("L"))) {
+			if (((gameData1.equals("R")) || (gameData1.equals("L"))) && (gameData2.equals("L"))) {
 				
 				autoExecution.leftScale(true);
 			}
 			 
-			if ((gameData1.equals("L")) || (gameData1.equals("R")) && (gameData2.equals("R"))) {
+			if (((gameData1.equals("R")) || (gameData1.equals("L"))) && (gameData2.equals("R"))) {
 				
 				autoExecution.rightCross(true);
 			}
+		}
+		
+		
+		if ((switch1.get() == true) && (switch2.get() == true) && (switch3.get() == true)) {
+			
+			System.out.println("Just Driving Foward");
+			
+			autoExecution.driveForward(true);
 		}
 	}
 }

@@ -109,7 +109,6 @@ public class Robot extends SampleRobot {
 				
 			}
 			
-			
 		autoSelections.autoSelections(switch1, switch2, switch3);
 		
 		}
