@@ -1,8 +1,10 @@
-/*----------------------------------------------------------------------------*/
+/**----------------------------------------------------------------------------
 /*Official 2018 Mattawan WiredCats Competition code
  * 
- * WIP
- */
+ *Made Possible by Matt Hummel, Logan Rusinek, and many others
+ **/
+
+
 package org.usfirst.frc.team5675.robot;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.SerialPort;
