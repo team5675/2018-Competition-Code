@@ -8,8 +8,6 @@
 package org.usfirst.frc.team5675.robot;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -17,19 +15,13 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.hal.DIOJNI;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
-import Autos.autoSelections;
+
+import Modes.autoSelections;
 
 
 public class Robot extends SampleRobot {
@@ -85,8 +77,6 @@ public class Robot extends SampleRobot {
 
 	@Override
 	public void robotInit() {
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		
 		gyro.reset();
 		driveEncoder.reset();
 		driveEncoder.setDistancePerPulse(0.0097714);
@@ -111,7 +101,7 @@ public class Robot extends SampleRobot {
 				
 			}
 			
-		autoSelections.autoSelections(switch1, switch2, switch3);
+		autoSelections.autoSelection(switch1, switch2, switch3);
 		
 		}
 	
@@ -607,6 +597,8 @@ public class Robot extends SampleRobot {
 		}
 		}*/
 	}
+	
+	
 	@Override
 	public void operatorControl() {
 		gyro.reset();
