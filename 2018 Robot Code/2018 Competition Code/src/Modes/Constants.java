@@ -23,7 +23,7 @@ public class Constants extends autoSelections {
 	static Encoder driveEncoder = new Encoder(0, 1);//Is that explanatory enough?
 	
 	
-	static AHRS gyro = new AHRS(SerialPort.Port.kMXP);//Autonomous Setting System (ASS)
+	static AHRS gyro = new AHRS(SerialPort.Port.kMXP);//Autonomous Setting System
 	
 	
 	static RobotDrive driveTrain = new RobotDrive(0, 1, 2, 3);//goes left to right, right Matt?
