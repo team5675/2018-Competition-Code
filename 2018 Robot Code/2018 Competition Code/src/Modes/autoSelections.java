@@ -2,7 +2,7 @@ package Modes;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DigitalInput;
-import Modes.autoSelections;
+import Modes.autoExecutions;
 
 public class autoSelections {
 	
@@ -21,69 +21,68 @@ public class autoSelections {
 			
 			if (gameData1.equals("L") && gameData2.equals("L")) {
 				
-				leftSwitch.leftSwitch(true);
+				autoExecutions.leftSwitch(true);
 				
 			}
 			
 			if (gameData1.equals("R") && gameData2.equals("L")) {
 				
-				rightScale.rightScale(true);
+				autoExecutions.leftScale(true);
 			}
 			
 			if (gameData1.equals("L") && gameData2.equals("R")) {
 				
-				leftSwitch.leftSwitch(true);
+				autoExecutions.leftSwitch(true);
 			}
 			
 			if (gameData1.equals("R") && gameData2.equals("R")) {
 				
-				driveForward.driveForward(true);
+				autoExecutions.driveForward(true);
 			}
-			
 			
 		}
 		
-		if ((switch1.get() == true) && (switch2.get() == false) && (switch3.get() == true)) {
+		if ((switch1.get() == true) && (switch2.get() == false) && (switch3.get() == true)) { //center switch
 			
 			System.out.println("Center Switch is Trucking!");
 			
 			
-			if((gameData1.equals("L")) && ((gameData2.equals("L")) || (gameData2.equals("R")))) {
+			if((gameData1.equals("L")) && (gameData2.equals("L"))) {
 			
-				centerSwitchLeft.centerSwitchLeft(true);
+				autoExecutions.centerSwitchLeft(true);
 			}
 			
-			if((gameData1.equals("R")) && ((gameData2.equals("L")) || (gameData2.equals("R")))) {
+			if((gameData1.equals("R")) && (gameData2.equals("L"))) {
 				
-				centerSwitchRight.centerSwitchRight(true);
+				autoExecutions.centerSwitchRight(true);
 			}
 		}
 		
-		if ((switch1.get() == true) && (switch2.get() == true) && (switch3.get() == false)) {
+		if ((switch1.get() == true) && (switch2.get() == true) && (switch3.get() == false)) { //right side smart
 			
 			System.out.println("Right Side Smart is Going!");
 			
 			if ((gameData1.equals("R")) && (gameData2.equals("R"))) {
 			
 			
-				rightSwitch.rightSwitch(true);
+				autoExecutions.rightSwitch(true);
 				
 			}
 			
 			if ((gameData1.equals("L")) && (gameData2.equals("R"))) {
 				
-				rightScale.rightScale(true);
+				autoExecutions.rightScale(true);
 			}
 			
 			if ((gameData1.equals("R")) && (gameData2.equals("L"))) {
 				
-				rightSwitch.rightSwitch(true);
+				autoExecutions.rightSwitch(true);
 				
 			}
 			
 			if ((gameData1.equals("L")) && (gameData2.equals("L"))) {
 				
-				driveForward.driveForward(true);
+				autoExecutions.driveForward(true);
 				
 			}
 		}
@@ -95,12 +94,12 @@ public class autoSelections {
 			
 			if (((gameData1.equals("L")) || (gameData1.equals("R"))) && (gameData2.equals("L"))) {
 				
-				leftCross.leftCross(true);
+				autoExecutions.leftCross(true);
 			}
 			
-			if (((gameData1.equals("L")) || (gameData1.equals("R"))) && (gameData2.equals("R"))) {
+			if ((gameData1.equals("L")) && (gameData2.equals("R"))) {
 				
-				rightScale.rightScale(true);
+				autoExecutions.rightScale(true);
 			}
 		}
 		
@@ -108,14 +107,14 @@ public class autoSelections {
 			
 			System.out.println("Left Side Plus Crossing is Going");
 			
-			if (((gameData1.equals("R")) || (gameData1.equals("L"))) && (gameData2.equals("L"))) {
+			if ((gameData1.equals("R")) && (gameData2.equals("L"))) {
 				
-				leftScale.leftScale(true);
+				autoExecutions.leftScale(true);
 			}
 			 
-			if (((gameData1.equals("R")) || (gameData1.equals("L"))) && (gameData2.equals("R"))) {
+			if ((gameData1.equals("R")) && (gameData2.equals("R"))) {
 				
-				rightCross.rightCross(true);
+				autoExecutions.rightCross(true);
 			}
 		}
 		
@@ -123,15 +122,15 @@ public class autoSelections {
 			
 			System.out.println("Right side scale plus halfway is on the way");
 			
-			if (((gameData1.equals("R")) || (gameData1.equals("L"))) && (gameData2.equals("R"))) {
+			if ((gameData1.equals("R")) && (gameData2.equals("R"))) {
 				
-				rightScale.rightScale(true);
+				autoExecutions.rightScale(true);
 				
 			}
 			
-			if (((gameData1.equals("R")) || (gameData1.equals("L"))) && (gameData2.equals("L"))) {
+			if ((gameData1.equals("R")) && (gameData2.equals("L"))) {
 				
-				halfLeftScale.halfLeftScale(true);
+				autoExecutions.halfLeftScale(true);
 				
 			}
 		}
@@ -140,15 +139,15 @@ public class autoSelections {
 			
 			System.out.println("Left side scale plus halfway is on the way");
 			
-			if (((gameData1.equals("R")) || (gameData1.equals("L"))) && (gameData2.equals("L"))) {
+			if ((gameData1.equals("R")) && (gameData2.equals("L"))) {
 				
-				leftScale.leftScale(true);
+				autoExecutions.leftScale(true);
 				
 			}
 			
-			if (((gameData1.equals("R")) || (gameData1.equals("L"))) && (gameData2.equals("R"))) {
+			if ((gameData1.equals("R")) && (gameData2.equals("R"))) {
 				
-				halfRightScale.halfRightScale(true);
+				autoExecutions.halfRightScale(true);
 				
 			}
 		}
@@ -157,7 +156,7 @@ public class autoSelections {
 			
 			System.out.println("Just Driving Foward");
 			
-			driveForward.driveForward(true);
+			autoExecutions.driveForward(true);
 			
 		}
 	}

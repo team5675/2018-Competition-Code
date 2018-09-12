@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import com.kauailabs.navx.frc.AHRS;
-
 import Modes.autoSelections;
 
 
@@ -34,48 +33,43 @@ public class Robot extends SampleRobot {
 	
 	double bheight, cheight, sheight, theight;
 
-	RobotDrive chassis = new RobotDrive(0, 1, 2, 3);//chassis
+	protected static RobotDrive chassis = new RobotDrive(0, 1, 2, 3);//chassis
 	
-	XboxController xbox1 = new XboxController(0);
+	private XboxController xbox1 = new XboxController(0);
 	
-	XboxController xbox2 = new XboxController(1);
+	private XboxController xbox2 = new XboxController(1);
 	
-	Spark lift1 = new Spark(4);//lift motors
+	protected static Spark lift1 = new Spark(4);//lift motors
 	
-	Spark lift2 = new Spark(5);
+	protected static Spark lift2 = new Spark(5);
 	
-	Spark intake1 = new Spark(6);//intake wheel motors
+	protected static Spark intake1 = new Spark(6);//intake wheel motors
 	
-	Spark intake2 = new Spark(8);
+	protected static Spark intake2 = new Spark(8);
 	
-	Spark climber = new Spark(9);//climber motor
+	protected static Spark climber = new Spark(9);//climber motor
 	
-	Spark arm = new Spark(7);
+	protected static Spark arm = new Spark(7);
 	
-	Compressor comp = new Compressor(0);
+	protected static Compressor comp = new Compressor(0);
 		
-	DoubleSolenoid deploy = new DoubleSolenoid(2, 3);//claw pneumatic deployment
+	protected static DoubleSolenoid deploy = new DoubleSolenoid(2, 3);//claw pneumatic deployment
 	
-	DoubleSolenoid clamp = new DoubleSolenoid(0, 1);//claw clamping pneumatics
+	protected static DoubleSolenoid clamp = new DoubleSolenoid(0, 1);//claw clamping pneumatics
 	
-	Double intakedrive;//value to control intake wheels
+	protected static Double intakedrive;//value to control intake wheels
 	
-	Encoder liftencoder = new Encoder(2, 3);//elevator encoder
+	protected static Encoder liftencoder = new Encoder(2, 3);//elevator encoder
 	
-	Encoder driveEncoder = new Encoder(0, 1);
+	protected static Encoder driveEncoder = new Encoder(0, 1);
 	
-	AHRS gyro = new AHRS(SerialPort.Port.kMXP);
+	protected static AHRS gyro = new AHRS(SerialPort.Port.kMXP);
 	
 	DigitalInput switch1 = new DigitalInput(4);
 	
 	DigitalInput switch2 = new DigitalInput(5);
 	
 	DigitalInput switch3 = new DigitalInput(6);
-	
-	double auto, lspeed;
-	
-	public Robot() {
-	}
 
 	@Override
 	public void robotInit() {
@@ -106,8 +100,7 @@ public class Robot extends SampleRobot {
 		autoSelections.autoSelection(switch1, switch2, switch3);
 		
 		}
-	
-		
+		}
 		/*while(DriverStation.getInstance().getGameSpecificMessage().length()<1) {//wait until we get the signal
 			Timer.delay(0.05);
 		}
@@ -598,11 +591,12 @@ public class Robot extends SampleRobot {
 			chassis.arcadeDrive(0,0);
 		}
 		}*/
-	}
+		
 	
 	
 	@Override
 	public void operatorControl() {
+		
 		gyro.reset();
 		driveEncoder.reset();
 		Timer.delay(0.005);
@@ -661,6 +655,7 @@ public class Robot extends SampleRobot {
 			System.out.println(driveEncoder.getRaw());
 			
 			Timer.delay(0.005);
+			System.out.println(gyro.getAngle());
 		}
 	}
 
