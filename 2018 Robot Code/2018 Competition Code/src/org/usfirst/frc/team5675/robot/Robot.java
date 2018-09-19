@@ -100,7 +100,7 @@ public class Robot extends SampleRobot {
 		autoSelections.autoSelection(switch1, switch2, switch3);
 		
 		}
-		}
+
 		/*while(DriverStation.getInstance().getGameSpecificMessage().length()<1) {//wait until we get the signal
 			Timer.delay(0.05);
 		}
@@ -589,8 +589,8 @@ public class Robot extends SampleRobot {
 				chassis.arcadeDrive(0, -0.75);
 			}
 			chassis.arcadeDrive(0,0);
-		}
 		}*/
+		}
 		
 	
 	

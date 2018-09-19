@@ -1,6 +1,7 @@
 package Modes;
 
 import edu.wpi.first.wpilibj.Timer;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class autoExecutions extends org.usfirst.frc.team5675.robot.Robot{
@@ -13,7 +14,7 @@ public static double angleRotation(double targetAngle, double theta) {
 		
 		double Kp = .01;
 		
-		double rotation = 0;
+		double rotationSpeed = 0;
 		
 		double threshold = 5;
 		
@@ -21,15 +22,15 @@ public static double angleRotation(double targetAngle, double theta) {
 		
 		if (error > threshold) {
 			
-			rotation = error * Kp;	
+			rotationSpeed = error * Kp;	
 		}
 		
 		if (error < threshold) {
 			
-			rotation = 0;
+			rotationSpeed = 0;
 		}
 		
-		return rotation;
+		return rotationSpeed;
 	}
 	
 	
@@ -48,7 +49,7 @@ public static void centerSwitchLeft(boolean isAuto) {
 			}
 			
 			
-			while((gyro.getAngle()>-30)) {
+			while((gyro.getAngle() > -30)) {
 				
 				chassis.arcadeDrive(0, angleRotation(-30, gyro.getAngle()));
 			}
@@ -57,10 +58,10 @@ public static void centerSwitchLeft(boolean isAuto) {
 			driveEncoder.reset();
 			
 			
-			while((driveEncoder.getDistance()>-86)) {
+			while((driveEncoder.getDistance() > -86)) {
 				
 				
-				chassis.arcadeDrive(0.7, (gyro.getAngle()+24)*.06);
+				chassis.arcadeDrive(0.7, angleRotation(-30, gyro.getAngle()));
 				
 				if(liftencoder.getRaw()<68000){
 						
@@ -77,9 +78,9 @@ public static void centerSwitchLeft(boolean isAuto) {
 			}
 			
 			
-			while((gyro.getAngle()>-65)) {
+			while((gyro.getAngle() < 65)) {
 				
-				chassis.arcadeDrive(0, angleRotation(-65, gyro.getAngle()));
+				chassis.arcadeDrive(0, angleRotation(65, gyro.getAngle()));
 				
 				deploy.set(Value.kForward);
 				
